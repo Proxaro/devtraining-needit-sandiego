@@ -1,8 +1,3 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger:
 - master
 
@@ -14,6 +9,9 @@ steps:
   persistCredentials: true
 
 - script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+   git config --global user.email pipeline@demo.com & git config --global user.name "Pipeline"
+
+- script: |
+   git checkout -b master
+   git commit -m "deployment $(Build.BuildNumber)"
+   git push --set-upstream origin master 
